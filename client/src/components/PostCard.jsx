@@ -163,8 +163,8 @@ const CommentForm = ({ user, id, replyAt, getComments, postDescription }) => {
 
 			const endpoint =
 				replyAt ?
-					"http://localhost:8800/genrate/suggest-replies"
-				:	"http://localhost:8800/genrate/suggest-comments";
+					`${process.env.REACT_APP_API_URL || "http://localhost:8800"}/genrate/suggest-replies"
+				:	`${process.env.REACT_APP_API_URL || "http://localhost:8800"}/genrate/suggest-comments";
 
 			const payload =
 				replyAt ?
@@ -351,7 +351,7 @@ const PostCard = ({ post, user }) => {
 				return;
 			}
 
-			const res = await fetch("http://localhost:8800/genrate/summarize-post", {
+			const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:8800"}/genrate/summarize-post", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ text }),

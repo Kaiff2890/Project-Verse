@@ -63,7 +63,7 @@ const UserModal = ({ user, onClose, onSave, onDelete }) => {
   const save = async () => {
     setSaving(true); setMsg("");
     try {
-      const r = await fetch(`http://localhost:8800/admin/users/${user._id}`,
+      const r = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:8800"}/admin/users/${user._id}`,
         { method:"PUT", headers:{"Content-Type":"application/json"}, body:JSON.stringify(form) });
       const j = await r.json();
       if (j.success) { setMsg("✅ Saved!"); onSave(j.user); setTimeout(()=>setTab("view"),800); }
@@ -75,7 +75,7 @@ const UserModal = ({ user, onClose, onSave, onDelete }) => {
   const del = async () => {
     setDeleting(true);
     try {
-      const r = await fetch(`http://localhost:8800/admin/users/${user._id}`, { method:"DELETE" });
+      const r = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:8800"}/admin/users/${user._id}`, { method:"DELETE" });
       const j = await r.json();
       if (j.success) { onDelete(user._id); onClose(); }
       else setMsg("❌ " + (j.message||"Failed"));
@@ -249,7 +249,7 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     if (localStorage.getItem("isAdmin") !== "true") { navigate("/admin-login"); return; }
-    fetch("http://localhost:8800/admin/stats")
+    fetch(`${process.env.REACT_APP_API_URL || "http://localhost:8800"}/admin/stats")
       .then(r=>r.json())
       .then(j => { if(j.success) setData(j); else setError(j.message||"Failed"); })
       .catch(()=>setError("Cannot reach server"))

@@ -79,7 +79,7 @@ const [previewFiles, setPreviewFiles] = useState([]);
 			}
 
 			const res = await fetch(
-				"http://localhost:8800/genrate/generate-caption",
+				`${process.env.REACT_APP_API_URL || "http://localhost:8800"}/genrate/generate-caption",
 				{
 					method: "POST",
 					headers: { "Content-Type": "application/json" },

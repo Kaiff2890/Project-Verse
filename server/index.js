@@ -31,8 +31,11 @@ dbConnection();
 app.use(helmet());
 app.use(
 	cors({
-		// origin: "https://faisal-socialmedia.netlify.app",
-		origin: "http://localhost:3000",
+		origin: [
+			"http://localhost:3000",
+			process.env.APP_URL_C, // We will use APP_URL_C for the Vercel URL
+			"https://project-verse-xglp.vercel.app" // Fallback hardcoded for now
+		],
 		credentials: true,
 	}),
 );

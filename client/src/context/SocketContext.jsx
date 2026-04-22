@@ -19,7 +19,7 @@ export const SocketContextProvider = ({ children }) => {
 
 	useEffect(() => {
 		if (authUser) {
-			const socket = io("http://localhost:8800", {
+			const socket = io((process.env.REACT_APP_API_URL || "http://localhost:8800"), {
 				query: {
 					userId: authUser._id,
 				},

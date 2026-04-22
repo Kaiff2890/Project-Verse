@@ -117,7 +117,7 @@ const ChatBot = () => {
 			.filter((m) => m.role === "user" || m.role === "model")
 			.map((m) => ({ role: m.role, text: m.text }));
 
-		const res = await fetch("http://localhost:8800/genrate/chat", {
+		const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:8800"}/genrate/chat", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ message: text, history }),

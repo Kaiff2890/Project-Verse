@@ -36,7 +36,7 @@ const useSendMessage = () => {
 		}
 		setLoading(true);
 		try {
-			const res = await fetch(`http://localhost:8800/chat/send/${receiverId}`, {
+			const res = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:8800"}/chat/send/${receiverId}`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
