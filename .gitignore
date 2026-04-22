@@ -1,0 +1,17 @@
+# Root
+node_modules/
+.DS_Store
+desktop.ini
+
+# Client
+client/node_modules/
+client/build/
+client/.env
+client/.env.local
+client/.env.production
+
+# Server
+server/node_modules/
+server/.env
+server/uploads/*
+!server/uploads/.gitkeep

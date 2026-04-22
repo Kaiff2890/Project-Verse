@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -----------------------------
+   Global polish (doesn't fight Tailwind)
+------------------------------ */
+html, body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  background-color: rgb(var(--color-bg));
+  color: rgb(var(--color-ascent1));
+}
+
+/* Better selection color */
+::selection {
+  background: rgba(var(--color-blue), 0.22);
+}
+
+/* -----------------------------
+   Scrollbar (DON'T hide globally)
+   Hide it ONLY where you really want.
+------------------------------ */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(102, 102, 102, 0.45) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(102, 102, 102, 0.35);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(102, 102, 102, 0.55);
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+/* If you STILL want hidden scrollbar in specific places:
+   add className="no-scrollbar" to that container */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* -----------------------------
+   Sticky topbar stays
+------------------------------ */
+.topbar{
+  position: sticky;
+  top: 0px;
+  z-index: 49;
+}
+
+/* -----------------------------
+   Loading dots
+------------------------------ */
+.dots-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(102,102,102,0.25);
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(10px);
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  border-radius: 999px;
+  background: rgb(var(--color-blue));
+  animation: pulse 1.2s infinite ease-in-out;
+  opacity: 0.7;
+}
+
+.dot:nth-child(1) { animation-delay: -0.30s; }
+.dot:nth-child(2) { animation-delay: -0.15s; }
+.dot:nth-child(3) { animation-delay: 0s; }
+.dot:nth-child(4) { animation-delay: 0.15s; }
+.dot:nth-child(5) { animation-delay: 0.30s; }
+
+@keyframes pulse {
+  0%, 100% {
+    transform: translateY(0) scale(0.92);
+    opacity: 0.55;
+    box-shadow: 0 0 0 0 rgba(var(--color-blue), 0.0);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.08);
+    opacity: 1;
+    box-shadow: 0 10px 22px rgba(var(--color-blue), 0.3);
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .dot { animation: none; }
+}
+
+/* -----------------------------
+   Theme variables (Glassmorphism & Neon)
+------------------------------ */
+@layer base {
+  :root {
+    --color-bg: 245 245 245;
+    --color-primary: 255 255 255;
+    --color-secondary: 240 240 240;
+    --color-ascent1: 20 20 20;
+    --color-ascent2: 89 91 100;
+    --color-blue: 6 90 216;
+    --color-neon: 0 255 200;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.5);
+  }
+
+  [data-theme="dark"] {
+    --color-bg: 10 10 10;
+    --color-primary: 25 25 25;
+    --color-secondary: 40 40 40;
+    --color-ascent1: 240 240 240;
+    --color-ascent2: 164 161 162;
+    --color-blue: 6 90 216;
+    --color-neon: 0 255 200;
+    --glass-bg: rgba(25, 25, 25, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.1);
+  }
+}
